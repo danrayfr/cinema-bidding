@@ -11,4 +11,5 @@ class User < ApplicationRecord
   validates :mobile, presence: true, length: { minimum: 11, maximum: 11 }
 
   enum :role, %i[user, admin]
+  has_many :cinemas
 end
