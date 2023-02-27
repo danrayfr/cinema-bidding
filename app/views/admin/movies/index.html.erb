@@ -27,7 +27,7 @@
           <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
             <%= link_to movie.title, admin_movie_path(movie) %>
           </td>
-          <td class="px-6 py-4 font-normal text-gray-700 whitespace-normal"><%= time_ago_in_words(movie.created_at)%></td>
+          <td class="px-6 py-4 font-normal text-gray-700 whitespace-normal"><%= time_tag movie.created_at, "data-local": "time-ago" %></td>
           <td class="px-6 py-4 font-normal text-gray-700 whitespace-normal">Open</td>
           <td>
             <%= link_to "Edit", edit_admin_movie_path(movie), class:"text-yellow-600"%>

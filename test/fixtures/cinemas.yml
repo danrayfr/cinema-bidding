@@ -1,9 +1,7 @@
 cinemax:
   name: Cinemax
   seats: 10
-  user: danray
 
 cinemaone:
   name: cinemaone
   seats: 10
-  user: danray
