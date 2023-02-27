@@ -75,3 +75,6 @@ group :test do
   gem "minitest", "~> 5.17"
   gem "minitest-reporters", "~> 1.5"
 end
+
+
+gem "devise"
