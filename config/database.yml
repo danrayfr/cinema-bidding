@@ -84,3 +84,4 @@ production:
   database: cinema_booking_production
   username: cinema_booking
   password: <%= ENV["CINEMA_BOOKING_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
