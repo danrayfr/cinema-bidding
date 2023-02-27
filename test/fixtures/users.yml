@@ -1,0 +1,13 @@
+danray:
+  first_name: "Dan Ray"
+  last_name: "Rollan"
+  mobile: "09560635541"
+  email: "danrayrollan98@gmail.com"
+  role: "admin"
+
+genie:
+  first_name: "genie"
+  last_name: "co"
+  mobile: "092823620179"
+  email: "genie@co.com"
+  role: "user"
