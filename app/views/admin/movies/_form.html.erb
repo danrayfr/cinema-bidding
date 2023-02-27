@@ -1,0 +1,12 @@
+<%= form_with(model: [:admin, @movie], id: "#{dom_id(@movie)}_form") do |form| %>
+  <%= render "shared/error_messages", object: form.object %>
+
+  <div class="mb-6">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="mb-6">
+    <%= form.submit %>
+  </div>
+<% end %>
