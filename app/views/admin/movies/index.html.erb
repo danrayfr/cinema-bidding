@@ -1,0 +1,40 @@
+<div>
+  <h1 class="font-bold text-4xl flex justify-center">Movie</h1>
+</div>
+
+<div class="mt-12">
+  <%= link_to "Add Movie", new_admin_movie_path %>
+</div>
+
+
+<div class="relative overflow-x-auto">
+  <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+    <thead class="text-xs text-gray-800 uppercase bg-gray-300">
+      <tr>
+        <th class="px-6 py-3" scope="col">ID</th>
+        <th class="px-6 py-3" scope="col">Movie Title</th>
+        <th class="px-6 py-3" scope="col">Date Added</th>
+        <th class="px-6 py-3" scope="col">Status</th>
+        <th class="px-6 py-3" scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @movies.each do |movie| %>
+      <tr class="bg-gray-100 border-b">
+          <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+            <%= movie.id %>
+          </td>
+          <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+            <%= link_to movie.title, admin_movie_path(movie) %>
+          </td>
+          <td class="px-6 py-4 font-normal text-gray-700 whitespace-normal"><%= time_ago_in_words(movie.created_at)%></td>
+          <td class="px-6 py-4 font-normal text-gray-700 whitespace-normal">Open</td>
+          <td>
+            <%= link_to "Edit", edit_admin_movie_path(movie), class:"text-yellow-600"%>
+            <%= link_to "Delete", admin_movie_path(movie), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class:"text-red-600"%>
+          </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

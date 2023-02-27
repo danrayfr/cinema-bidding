@@ -1,0 +1,5 @@
+<%= provide(:title, "#{@movie.title}")%>
+
+<%= link_to @movie.title, edit_admin_movie_path(@movie) %>
+
+<%= link_to "Delete", admin_movie_path(@movie), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
