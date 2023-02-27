@@ -1,4 +1,4 @@
 class Cinema < ApplicationRecord
-  belongs_to :user
-  validates :name, presence: true, length: { maximum: 30 }
+  validates :name, presence: true, length: { maximum: 30 }, :uniqueness => true
+  default_scope -> { order(created_at: :desc) }
 end
