@@ -13,8 +13,9 @@
       <tr>
         <th class="px-6 py-3" scope="col">ID</th>
         <th class="px-6 py-3" scope="col">Name</th>
-        <th class="px-6 py-3" scope="col">Date Added</th>
         <th class="px-6 py-3" scope="col">Available Seats</th>
+        <th class="px-6 py-3" scope="col">Date Added</th>
+        <th class="px-6 py-3" scope="col">Listed or updated by(admin user)</th>
         <th class="px-6 py-3" scope="col">Action</th>
       </tr>
     </thead>
@@ -27,8 +28,9 @@
           <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
             <%= link_to cinema.name, admin_cinema_path(cinema) %>
           </td>
+          <td class="px-6 py-4 font-normal text-gray-700 whitespace-normal"><%= cinema.seats.count %></td>
           <td class="px-6 py-4 font-normal text-gray-700 whitespace-normal"><%= time_tag cinema.created_at, "data-local": "time-ago" %></td>
-          <td class="px-6 py-4 font-normal text-gray-700 whitespace-normal"><%= pluralize(cinema.seats, "seats")%></td>
+          <td class="px-6 py-4 font-normal text-gray-700 whitespace-normal"><%= cinema.user.full_name  %></td>
           <td>
             <%= link_to "Edit", edit_admin_cinema_path(cinema), class:"text-yellow-600"%>
             <%= link_to "Delete", admin_cinema_path(cinema), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class:"text-red-600"%>

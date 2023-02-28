@@ -2,7 +2,8 @@ require "test_helper"
 
 class MovieTest < ActiveSupport::TestCase
   def setup 
-    @movie = Movie.create(title: "Spiderman")
+    @user = users(:danray)
+    @movie = @user.movies.build(title: "Spiderman")
   end
 
   test "should be valid" do
