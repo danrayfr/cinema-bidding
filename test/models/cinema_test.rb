@@ -2,7 +2,8 @@ require "test_helper"
 
 class CinemaTest < ActiveSupport::TestCase
   def setup
-    @cinema = Cinema.new(name: "iMax")
+    @user = users(:danray)
+    @cinema = @user.cinemas.build(name: "iMax")
   end
 
   test "should be valid" do
@@ -12,10 +13,6 @@ class CinemaTest < ActiveSupport::TestCase
   test "name should be present" do
     @cinema.name = ""
     assert_not @cinema.valid?
-  end
-
-  test "seats should be 10 by default" do
-    assert @cinema.seats == 10
   end
 
   test "should not be more than 30 characters" do 

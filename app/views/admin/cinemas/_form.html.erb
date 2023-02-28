@@ -6,6 +6,12 @@
     <%= form.text_field :name %>
   </div>
 
+   <div class="mb-6">
+    <%= form.label :seat_count %>
+    <span>(If you leave the field empty, by default the available seats for the cinema you will create is 10.)</span>
+    <%= form.number_field :seat_count %>
+  </div>
+
   <div class="mb-6">
     <%= form.submit %>
   </div>

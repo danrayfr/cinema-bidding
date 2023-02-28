@@ -12,4 +12,9 @@ class User < ApplicationRecord
 
   enum :role, %i[user admin]
   has_many :cinemas
+  has_many :movies
+  
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 end

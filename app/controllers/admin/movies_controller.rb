@@ -10,28 +10,31 @@ class Admin::MoviesController < Admin::AdminController
   end
 
   def new
-    @movie = Movie.new
+    @movie = current_user.movies.build
   end
 
   def edit; end
 
   def create
-    @movie = Movie.new(movie_params)
-
+    @movie = current_user.movies.build(movie_params)
     respond_to do |format| 
       if @movie.save
         format.html { redirect_to admin_movies_url, notice: 'Movie was successfully created.'}
+        @created_by = current_user.id
       else
         format.html { render :new, status: :unprocessable_entity }
       end
     end
   end
 
-  def update 
+  def update
     @movie = Movie.find(params[:id])
+    @movie.user_id = current_user.id # Get the user who last updated the record
+
     respond_to do |format| 
       if @movie.update(movie_params)
         format.html { redirect_to admin_movie_url(@movie), notice: 'Movie was successfully updated.'}
+        @updated_by = current_user.id
       else
         format.html { render :edit, status: :unprocessable_entity }
       end

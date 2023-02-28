@@ -1,5 +1,6 @@
 class Admin::CinemasController < Admin::AdminController
   before_action :set_cinema, only: %i(show edit)
+  before_action :set_default_seat_count
 
   def index
     @cinemas = Cinema.all
@@ -8,16 +9,27 @@ class Admin::CinemasController < Admin::AdminController
   def show; end
 
   def new 
-    @cinema = Cinema.new
+    @cinema = current_user.cinemas.build
   end
 
   def edit; end 
 
   def create 
-    @cinema = Cinema.new(cinema_params)
+    @cinema = current_user.cinemas.build(cinema_params)
 
     respond_to do |format|
-      if @cinema.save 
+      if @cinema.save
+
+        if @cinema.seat_count.nil?
+          Cinema::DEFAULT_SEAT_COUNT.times do 
+            @cinema.seats.create
+          end
+        else
+          @cinema.seat_count.times do 
+            @cinema.seats.create
+          end
+        end
+
         format.html { redirect_to admin_cinemas_url, notice: "Cinema created successfully."}
       else 
         format.html { render :new, status: :unprocessable_entity }
@@ -27,6 +39,7 @@ class Admin::CinemasController < Admin::AdminController
 
   def update
     @cinema = Cinema.find(params[:id])
+    @cinema.user_id = current_user.id
     
     respond_to do |format|
       if @cinema.update(cinema_params)
@@ -54,6 +67,11 @@ class Admin::CinemasController < Admin::AdminController
   end
 
   def cinema_params
-    params.require(:cinema).permit(:name)
+    params.require(:cinema).permit(:name, :seat_count)
   end
+
+  def set_default_seat_count
+    @default_seat_count = Cinema::DEFAULT_SEAT_COUNT
+  end
+
 end

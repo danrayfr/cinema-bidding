@@ -13,8 +13,9 @@
       <tr>
         <th class="px-6 py-3" scope="col">ID</th>
         <th class="px-6 py-3" scope="col">Movie Title</th>
-        <th class="px-6 py-3" scope="col">Date Added</th>
         <th class="px-6 py-3" scope="col">Status</th>
+        <th class="px-6 py-3" scope="col">Date Added</th>
+        <th class="px-6 py-3" scope="col">Listed or updated by(admin user)</th>
         <th class="px-6 py-3" scope="col">Action</th>
       </tr>
     </thead>
@@ -27,8 +28,9 @@
           <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
             <%= link_to movie.title, admin_movie_path(movie) %>
           </td>
-          <td class="px-6 py-4 font-normal text-gray-700 whitespace-normal"><%= time_tag movie.created_at, "data-local": "time-ago" %></td>
           <td class="px-6 py-4 font-normal text-gray-700 whitespace-normal">Open</td>
+          <td class="px-6 py-4 font-normal text-gray-700 whitespace-normal"><%= time_tag movie.created_at, "data-local": "time-ago" %></td>
+          <td class="px-6 py-4 font-normal text-gray-700 whitespace-normal"><%= movie.user.full_name  %></td>
           <td>
             <%= link_to "Edit", edit_admin_movie_path(movie), class:"text-yellow-600"%>
             <%= link_to "Delete", admin_movie_path(movie), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class:"text-red-600"%>
