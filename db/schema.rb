@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_28_013804) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_28_062706) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -38,6 +38,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_28_013804) do
     t.index ["cinema_id"], name: "index_seats_on_cinema_id"
   end
 
+  create_table "showings", force: :cascade do |t|
+    t.date "date"
+    t.time "time"
+    t.bigint "movie_id", null: false
+    t.bigint "cinema_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cinema_id"], name: "index_showings_on_cinema_id"
+    t.index ["movie_id"], name: "index_showings_on_movie_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -57,4 +68,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_28_013804) do
   add_foreign_key "cinemas", "users"
   add_foreign_key "movies", "users"
   add_foreign_key "seats", "cinemas"
+  add_foreign_key "showings", "cinemas"
+  add_foreign_key "showings", "movies"
 end

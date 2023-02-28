@@ -1,0 +1,33 @@
+<%= form_with(model: [:admin, @showing], id: "#{dom_id(@showing)}_form") do |form| %>
+  <%= render "shared/error_messages", object: form.object %>
+
+  <div class="field">
+    <%= form.label :movie %><br>
+    <%= form.collection_select :movie_id, Movie.all, :id, :title%>
+  </div>
+
+   <div class="field">
+    <%= form.label :cinema %><br>
+    <%= form.collection_select :cinema_id, Cinema.all, :id, :name%>
+  </div>
+
+  <div class="mb-6">
+    <%= form.label :date %>
+    <%= form.date_field :date %>
+  </div>
+
+  <div class="mb-6">
+    <%= form.label :time %>
+    <%= form.time_field :time %>
+  </div>
+
+  <div class="mb-6">
+    <%#= form.label :time %>
+    <%#= form.select :time, options_for_select(Showing.times.map {|key, value| [key, value]}) %>
+  </div>
+
+  <div class="mb-6">
+    <%= form.submit %>
+  </div>
+
+<% end %>
