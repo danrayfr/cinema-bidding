@@ -14,4 +14,7 @@ class ActiveSupport::TestCase
   include Devise::Test::IntegrationHelpers
 
   # Add more helper methods to be used by all tests here...
+  def assert_gt(a, b)
+    assert_operator a, :>, b
+  end
 end

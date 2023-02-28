@@ -4,6 +4,6 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
   test "should get home" do
     get root_url
     assert_response :success
-    assert_select "title", "Home | Online Bidding"
+    assert_select "title", "Home | Cinema Booking"
   end
 end
