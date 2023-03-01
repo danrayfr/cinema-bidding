@@ -1,0 +1,38 @@
+<div>
+  <h1 class="font-bold text-4xl flex justify-center">Now Showing</h1>
+</div>
+<br>
+<div class="relative overflow-x-auto">
+  <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+    <thead class="text-xs text-gray-800 uppercase bg-gray-300">
+      <tr>
+        <th class="px-6 py-3" scope="col">ID</th>
+        <th class="px-6 py-3" scope="col">Movie Title</th>
+        <th class="px-6 py-3" scope="col">Cinema Name(location)</th>
+        <th class="px-6 py-3" scope="col">Available Seats</th>
+        <th class="px-6 py-3" scope="col">Showing Date</th>
+        <th class="px-6 py-3" scope="col">Showing Time</th>
+        <th class="px-6 py-3" scope="col">Date Added</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @showings.each do |show| %>
+      <tr class="bg-gray-100 border-b">
+          <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+            <%= show.id %>
+          </td>
+          <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+            <%= link_to show.movie.title, booking_path(show) %>
+          </td>
+          <td class="px-6 py-4 font-normal text-gray-700 whitespace-normal"><%= show.cinema.name %></td>
+          <td class="px-6 py-4 font-normal text-gray-700 whitespace-normal"><%= Seat.where(cinema_id: show.cinema.id).count - Booking.where(showing_id: show.id).count %></td>
+          <td class="px-6 py-4 font-normal text-gray-700 whitespace-normal"><%= show.date.strftime("%B %d %Y") %></td>
+          <td class="px-6 py-4 font-normal text-gray-700 whitespace-normal"><%= show.time.strftime("%I:%M %p") %></td>
+          <td class="px-6 py-4 font-normal text-gray-700 whitespace-normal"><%= time_tag show.created_at, "data-local": "time-ago" %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete }, class:"bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" if user_signed_in? %>

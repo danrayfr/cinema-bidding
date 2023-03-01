@@ -14,8 +14,11 @@ class Cinema < ApplicationRecord
   def default_seats
     if seat_count.nil?
       self.seat_count = DEFAULT_SEAT_COUNT
-      return seat_count
+    else 
+      self.seat_count
     end
+
+    return seat_count
   end
 
 end

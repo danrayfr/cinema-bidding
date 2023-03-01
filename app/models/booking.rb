@@ -1,14 +1,11 @@
 class Booking < ApplicationRecord
-  belongs_to :user
-  belongs_to :showing
-  belongs_to :seat
+  has_many :showings, dependent: :destroy
+  has_many :seats, dependent: :destroy
+
+  def remaining_seats(shw_id, cin_id)
+    total_seats = Seat.where(cinema_id: cin_id).count
+    total_bookings = Booking.where(showing_id: shw_id).count
+    return total_seats - total_bookings
+  end
+
 end
-
-# Seat.where(cinema_id: Showing.cinema.id)
-
-# seats.each do |seat|
-#   seat
-#   if seat.cinema_id == showing.cinema.id 
-#     @remaining_seats = showing.cinema.seat_count - seats.length
-#   end
-# end

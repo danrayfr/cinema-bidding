@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :showings
   end
 
-  root "pages#home"
+  root "bookings#index"
+  resources :bookings
   devise_for :users
 end
