@@ -11,8 +11,9 @@ class User < ApplicationRecord
   validates :mobile, presence: true, length: { minimum: 11, maximum: 11 }
 
   enum :role, %i[user admin]
-  has_many :cinemas
-  has_many :movies
+  has_many :cinemas, dependent: :destroy
+  has_many :movies, dependent: :destroy
+  has_many :bookings, dependent: :destroy
   
   def full_name
     "#{first_name} #{last_name}"

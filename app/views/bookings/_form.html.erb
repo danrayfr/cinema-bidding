@@ -1,0 +1,16 @@
+<%= form_with(model: [@booking], id: "#{dom_id(@booking)}_forms") do |form| %>
+  <div class="field">
+    <%= form.hidden_field :showing_id, value: @show.id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :seat_id, class:"block text-sm font-medium text-gray-900" %>
+    <% unless Booking.exists?(seat_id: seat_id)%>
+      <%= form.collection_select :seat_id, Seat.where(cinema_id: @show.cinema.id), :id, :id %>
+    <% end %>
+  </div>
+
+  <div class="mt-2">
+    <%= form.submit "Book a movie", class:"text-white bg-teal-600 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center" %>
+  </div>
+<% end %>

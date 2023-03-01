@@ -1,0 +1,33 @@
+<%= provide(:title, "#{ @show.movie.title }")%>
+<div>
+
+  <%= @show.movie.title %>
+  <%= @show.cinema.name %>
+  <%= "SeatCount: #{@show.cinema.seat_count}." %>
+
+  <% seats = Seat.where(cinema_id: @show.cinema.id)%>
+  <% seats.each do |seat| %>
+  <div class="flex flex-wrap -mx-1 lg:-mx-4 mt-2">
+  <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow bg-gray-600">
+  <% unless Booking.exists?(seat_id: seat.id) %>
+      <h5 class="mb-2 text-2xl font-bold tracking-tight text-green-600">
+        <%= @seat = seat.id %>
+      </h5>
+  <% else %>
+    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 ">
+        <%= seat.id %>
+      </h5>
+    <% end %>
+    </div>
+  </div>
+  <% end %>
+
+
+  <% if Booking.exists?(user_id: current_user.id, showing_id: @show.id)%>
+    <p>You're already booked.</p>
+  <% else %>
+    <%= render "form", show_id: @show.id, seat_id: @seat %>
+  <% end %>
+  
+  
+</div>

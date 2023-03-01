@@ -9,10 +9,16 @@ class Cinema < ApplicationRecord
 
   after_initialize :default_seats, if: :new_record?
 
+  private
+
   def default_seats
     if seat_count.nil?
       self.seat_count = DEFAULT_SEAT_COUNT
-      return seat_count
+    else 
+      self.seat_count
     end
+
+    return seat_count
   end
+
 end
