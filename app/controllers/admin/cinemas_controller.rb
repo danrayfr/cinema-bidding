@@ -20,7 +20,7 @@ class Admin::CinemasController < Admin::AdminController
     respond_to do |format|
       if @cinema.save
 
-      if @cinema.seat_count.nil?
+      if @cinema.seat_count.nil? || @cinema.seat_count <= 10
         Cinema::DEFAULT_SEAT_COUNT.times do 
           @cinema.seats.create
         end

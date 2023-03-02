@@ -21,7 +21,7 @@ class Admin::ShowingsController < ApplicationController
       if time.present?
         formatted_time = time.strftime("%H:%M")
         if formatted_time == "10:00" || formatted_time == "14:00" || formatted_time == "18:00" || formatted_time == "22:00"
-          if !Showing.exists?(date: date, time: formatted_time, movie_id: @showing.movie.id, cinema_id: @showing.cinema.id)
+          if !Showing.exists?(date: date, time: formatted_time, cinema_id: @showing.cinema.id)
             if @showing.save        
               format.html { redirect_to admin_showings_url, notice: "Show created successfully."}
             else 
@@ -50,7 +50,7 @@ class Admin::ShowingsController < ApplicationController
       if time.present?
         formatted_time = time.strftime("%H:%M")
         if formatted_time == "10:00"  || formatted_time == "14:00" || formatted_time == "18:00" || formatted_time == "22:00" 
-          if Showing.exists?(date: date, time: formatted_time, movie_id: @showing.movie.id, cinema_id: @showing.cinema.id)
+          if !Showing.exists?(date: date, time: formatted_time, cinema_id: @showing.cinema.id)
             
             if @showing.update(showing_params)      
               format.html { redirect_to admin_showings_url, notice: "Show updated successfully."}
@@ -59,7 +59,7 @@ class Admin::ShowingsController < ApplicationController
             end
 
           else 
-            format.html { redirect_to request.referer, alert: 'Please check the details. Schedule might already existed!' }
+            format.html { redirect_to request.referer, alert: "Please check the details. Schedule might already existed! #{date} #{time} #{@showing.cinema.id}" }
           end
 
         else

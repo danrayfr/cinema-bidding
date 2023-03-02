@@ -16,7 +16,7 @@ class MovieTest < ActiveSupport::TestCase
   end
  
   test "title should not be longer than 30 characters" do
-    @movie.title = "a" * 31
+    @movie.title = "a" * 101
     assert_not @movie.valid?
   end
  

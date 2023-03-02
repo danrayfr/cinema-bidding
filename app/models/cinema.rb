@@ -21,11 +21,4 @@ class Cinema < ApplicationRecord
     return seat_count
   end
 
-  def delete_all_and_update
-    Cinema.transaction do
-      self.seats.destroy_all
-      update_params
-    end
-  end
-
 end
