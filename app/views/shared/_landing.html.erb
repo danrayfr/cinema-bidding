@@ -4,7 +4,7 @@
     <span><%= yield(:span) %></span>
   </div>
 
-  <% if current_page?(root_path) %>
+  <% if current_page?(root_path) || current_page?(dashboard_path) %>
     <%  if user_signed_in?%>
     <p class="text-gray-700 text-2xl">
       Hello, <%= current_user.full_name %>

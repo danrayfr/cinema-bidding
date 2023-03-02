@@ -12,7 +12,7 @@
     <div class="items-center block w-full mt-2 text-center lg:flex lg:flex-row lg:flex-1 lg:mt-0 lg:text-left lg:justify-end">
       <div><%# More links can go here %></div>
       <% if user_signed_in? %>
-
+      <%= link_to "Dashboard", dashboard_path, class: "p-3 hover:bg-gray-100 transition ease duration-300 rounded-lg text-center focus:bg-gray-100 lg:inline-block block" %>
         <% if current_user.admin? %>
 
         <div data-controller="dropdown" data-dropdown-open-value="false" data-dropdown-opened-class="bg-slate-300">

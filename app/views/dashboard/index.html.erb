@@ -1,0 +1,24 @@
+<% provide(:title, "User Dashboard")%>
+<%= provide(:h1, "Dashboard")%>
+<%= provide(:span, "see your bookings.") %>
+
+<%= render "shared/landing"%>
+
+<div class="relative overflow-x-auto mt-6">
+  <table class="w-full text-sm text-left text-gray-500">
+    <thead class="text-xs text-gray-800 uppercase bg-gray-300">
+      <tr>
+        <th class="px-6 py-6" scope="col">Book ID</th>
+        <th class="px-6 py-6" scope="col">Showing Number</th>
+        <th class="px-6 py-6" scope="col">Seat number</th>
+        <th class="px-6 py-6" scope="col">Date booked</th>
+        <th class="px-6 py-6" scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @books.each do |book| %>
+        <%= render "dashboard/book", book: book %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
