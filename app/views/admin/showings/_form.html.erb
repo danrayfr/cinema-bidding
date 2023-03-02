@@ -18,12 +18,7 @@
 
   <div class="mb-6">
     <%= form.label :time %>
-    <%= form.time_field :time %>
-  </div>
-
-  <div class="mb-6">
-    <%#= form.label :time %>
-    <%#= form.select :time, options_for_select(Showing.times.map {|key, value| [key, value]}) %>
+    <%= form.time_field :time, value: "%H:%M" %>
   </div>
 
   <div class="mb-6">
