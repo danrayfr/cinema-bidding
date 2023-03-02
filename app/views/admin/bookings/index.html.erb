@@ -1,0 +1,24 @@
+<%= provide(:h1, "Bookings")%>
+<%= provide(:span, "List of all user's booking in the app.") %>
+<%= provide(:new_path, new_admin_showing_path)%>
+<%= provide(:button_name, "Add new")%>
+<%= render "shared/landing"%>
+
+<div class="relative overflow-x-auto mt-6">
+  <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+    <thead class="text-xs text-gray-800 uppercase bg-gray-300">
+      <tr>
+        <th class="px-6 py-3" scope="col">ID</th>
+        <th class="px-6 py-3" scope="col">Showing</th>
+        <th class="px-6 py-3" scope="col">Seat no.</th>
+        <th class="px-6 py-3" scope="col">User</th>
+        <th class="px-6 py-3" scope="col">Booked date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @bookings.each do |book| %>
+        <%= render "book", book: book%>
+      <% end %>
+    </tbody>
+  </table>
+</div>

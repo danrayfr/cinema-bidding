@@ -11,15 +11,15 @@ class BookingsController < ApplicationController
     @booking = current_user.bookings.build()
   end
 
-  def new
-    @booking = current_user.bookings.build()
-  end
+  # def new
+  #   @booking = current_user.bookings.build()
+  # end
 
   def create
     @booking = current_user.bookings.build(booking_params)
 
     respond_to do |format|
-      if Booking.exists?(seat_id: @booking.seat_id, showing_id: @booking.showing_id)
+      if check_if_record_exists?
         format.html { redirect_to request.referer, alert: "Seat is already occupied, try and another." }
       else 
         if @booking.save
@@ -37,7 +37,7 @@ class BookingsController < ApplicationController
     @booking = Booking.find(params[:id])
 
     respond_to do |format|
-      if Booking.exists?(seat_id: @booking.seat_id)
+      if Booking.exists?(seat_id: @booking.seat_id, showing_id: @booking.showing_id)
         format.html { redirect_to request.referer, alert: "Seat is already occupied, try and another." }
       else 
         if @booking.save
@@ -67,6 +67,10 @@ class BookingsController < ApplicationController
 
   def booking_params
     params.require(:booking).permit(:user_id, :showing_id, :seat_id)
+  end
+
+  def check_if_record_exists?
+    Booking.exists?(seat_id: @booking.seat_id, showing_id: @booking.showing_id)
   end
 
 end

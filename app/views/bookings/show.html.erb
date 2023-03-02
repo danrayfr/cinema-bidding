@@ -39,13 +39,13 @@
     </div >
   <% end %>
   <% end %>
-
-  <div class="mt-2">
-    <% if Booking.exists?(user_id: current_user.id, showing_id: @show.id)%>
-      <p>You're already booked.</p>
-    <% else %>
-      <%= render "form", show_id: @show.id, seat_id: @seat %>
-    <% end %>
-  </div>
   
+</div>
+
+<div class="mt-2">
+  <% if Booking.exists?(user_id: current_user.id, showing_id: @show.id)%>
+    <p>You're already booked.</p>
+  <% else %>
+    <%= render "form", show_id: @show.id, seat_id: @seat %>
+  <% end %>
 </div>
