@@ -17,18 +17,23 @@ class Admin::CinemasController < Admin::AdminController
   def create 
     @cinema = current_user.cinemas.build(cinema_params)
 
+    if @cinema.seat_count.nil? || @cinema.seat_count <= 10
+      @cinema.seat_count = 10
+    end
+
     respond_to do |format|
       if @cinema.save
 
-      if @cinema.seat_count.nil? || @cinema.seat_count <= 10
-        Cinema::DEFAULT_SEAT_COUNT.times do 
-          @cinema.seats.create
+        if @cinema.seat_count.nil? || @cinema.seat_count <= 10
+          @cinema.seat_count = 10
+          Cinema::DEFAULT_SEAT_COUNT.times do
+            @cinema.seats.create
+          end
+        else
+          @cinema.seat_count.times do 
+            @cinema.seats.create
+          end
         end
-      else
-        @cinema.seat_count.times do 
-          @cinema.seats.create
-        end
-      end
       
         format.html { redirect_to admin_cinemas_url, notice: "Cinema created successfully."}
       else 

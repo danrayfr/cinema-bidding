@@ -20,7 +20,7 @@ class BookingsController < ApplicationController
 
     respond_to do |format|
       if check_if_record_exists?
-        format.html { redirect_to request.referer, alert: "Seat is already occupied, try and another." }
+        format.html { redirect_to request.referer, alert: "Seat is already occupied, try another seat." }
       else 
         if @booking.save
           format.html { redirect_to root_url, notice: "Bookings saved successfully."}
