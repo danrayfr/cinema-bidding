@@ -1,33 +1,51 @@
 <%= provide(:title, "#{ @show.movie.title }")%>
-<div>
+<div class="flex items-center justify-between pb-6 border-b">
+  <div>
+    <h1 class="font-bold text-5xl text-gray-900"><%= @show.movie.title %></h1>
+    Cinema:<span class="font-medium"> <%= @show.cinema.name %></span>
+  </div>
+  <%  if user_signed_in?%>
+    <p class="text-gray-700 text-2xl">
+      Hello, <%= current_user.full_name %>
+    </p>
+  <% end %>
+</div>
 
-  <%= @show.movie.title %>
-  <%= @show.cinema.name %>
-  <%= "SeatCount: #{@show.cinema.seat_count}." %>
+<div class="mt-2 mb-6">
+<div class="inline-flex items-center">
+  <span class="w-2 h-2 inline-block bg-indigo-500 rounded-full mr-2"></span>
+  <span class="text-gray-600 dark:text-gray-400">Occupied</span>
+</div>
+<div class="inline-flex items-center">
+  <span class="w-2 h-2 inline-block bg-gray-600 rounded-full mr-2"></span>
+  <span class="text-gray-600 dark:text-gray-400">Available</span>
+</div>
+</div>
 
-  <% seats = Seat.where(cinema_id: @show.cinema.id)%>
+<% seats = Seat.where(cinema_id: @show.cinema.id)%>
+  <div class="flex flex-wrap -mx-1 lg:-mx-4 px-36 gap-8">
   <% seats.each do |seat| %>
-  <div class="flex flex-wrap -mx-1 lg:-mx-4 mt-2">
-  <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow bg-gray-600">
   <% unless Booking.exists?(seat_id: seat.id) %>
-      <h5 class="mb-2 text-2xl font-bold tracking-tight text-green-600">
-        <%= @seat = seat.id %>
-      </h5>
-  <% else %>
-    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 ">
+    <div class="max-w-sm p-6 border border-gray-200 rounded-lg shadow bg-white">
+      <h5 class="mb-2 text-md font-bold tracking-tight text-gray-600 px-2">
         <%= seat.id %>
       </h5>
-    <% end %>
-    </div>
-  </div>
-  <% end %>
-
-
-  <% if Booking.exists?(user_id: current_user.id, showing_id: @show.id)%>
-    <p>You're already booked.</p>
+    </div >
   <% else %>
-    <%= render "form", show_id: @show.id, seat_id: @seat %>
+    <div class="max-w-sm p-6 border border-gray-200 rounded-lg shadow bg-indigo-600">
+      <h5 class="mb-2 text-md font-bold tracking-tight text-white px-2">
+        <%= seat.id %>
+      </h5>
+    </div >
   <% end %>
-  
+  <% end %>
+
+  <div class="mt-2">
+    <% if Booking.exists?(user_id: current_user.id, showing_id: @show.id)%>
+      <p>You're already booked.</p>
+    <% else %>
+      <%= render "form", show_id: @show.id, seat_id: @seat %>
+    <% end %>
+  </div>
   
 </div>

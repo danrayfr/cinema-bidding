@@ -1,0 +1,22 @@
+<%= provide(:h1, "Users")%>
+<%= provide(:span, "List of users registered to the app.") %>
+<%= render "shared/landing"%>
+
+<div class="relative overflow-x-auto mt-6">
+  <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+    <thead class="text-xs text-gray-800 uppercase bg-gray-300">
+      <tr>
+        <th class="px-6 py-3" scope="col">ID</th>
+        <th class="px-6 py-3" scope="col">Name</th>
+        <th class="px-6 py-3" scope="col">Email</th>
+        <th class="px-6 py-3" scope="col">Role</th>
+        <th class="px-6 py-3" scope="col">Date Created</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+      <%= render "user", user: user %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,18 @@
+<div class="flex items-center justify-between pb-6 border-b">
+  <div>
+    <h1 class="font-bold text-5xl text-gray-900"><%= yield(:h1)%></h1>
+    <span><%= yield(:span) %></span>
+  </div>
+
+  <% if current_page?(root_path) %>
+    <%  if user_signed_in?%>
+    <p class="text-gray-700 text-2xl">
+      Hello, <%= current_user.full_name %>
+    </p>
+    <% end %>
+  <% end %>
+
+  <% if current_page?(admin_cinemas_path) || current_page?(admin_movies_path) || current_page?(admin_showings_path)%>
+    <%= link_to yield(:button_name), yield(:new_path), class:"text-white bg-indigo-600 hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded text-sm px-5 py-2.5 text-center"%>
+  <% end %>
+</div>

@@ -14,11 +14,12 @@
   <body>
     
     <header>
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+      <%= render "layouts/navbar" %>
+      <%= render "layouts/notifications" %>
     </header>
     
-    <main class="container mx-auto mt-28 px-5">
+    <main class="container mx-auto mt-12 px-5">
+    
       <%= yield %>
 
       <div class="mt-48 bg-gray-300 p-12 text-gray-700 box-border hover:box-content">

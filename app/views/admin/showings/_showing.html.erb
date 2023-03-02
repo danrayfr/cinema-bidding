@@ -1,0 +1,16 @@
+<tr class="border-b">
+  <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+    <%= show.id %>
+  </td>
+  <td scope="row" class="px-6 py-4 font-medium text-indigo-700 uppercase whitespace-nowrap">
+    <%= link_to show.movie.title, admin_showing_path(show) %>
+  </td>
+  <td class="px-6 py-4 font-normal text-gray-700 whitespace-normal"><%= show.cinema.name %></td>
+  <td class="px-6 py-4 font-normal text-gray-700 whitespace-normal"><%= show.date.strftime("%B %d %Y") %></td>
+  <td class="px-6 py-4 font-normal text-gray-700 whitespace-normal"><%= show.time.strftime("%I:%M %p") %></td>
+  <td class="px-6 py-4 font-normal text-gray-700 whitespace-normal"><%= time_tag show.created_at, "data-local": "time-ago" %></td>
+  <td>
+    <%= link_to "Edit", edit_admin_showing_path(show), class:"text-yellow-600"%>
+    <%= link_to "Delete", admin_showing_path(show), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class:"text-red-600"%>
+  </td>
+</tr>

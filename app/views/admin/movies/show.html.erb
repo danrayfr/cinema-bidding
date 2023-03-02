@@ -1,5 +1,10 @@
 <%= provide(:title, "#{@movie.title}")%>
+<%= provide(:h1, "#{@movie.title}")%>
+<%= provide(:new_path, "new_admin_movie_path")%>
+<%= provide(:button_name, "Add new Movie")%>
+<%= render "shared/landing"%>
 
-<%= link_to @movie.title, edit_admin_movie_path(@movie) %>
-
-<%= link_to "Delete", admin_movie_path(@movie), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
+<div class="mt-6">
+  <%= link_to "Edit", edit_admin_movie_path(@movie), class:"text-white bg-indigo-600 hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded text-sm px-5 py-2.5 text-center" %>
+  <%= link_to "Delete", admin_movie_path(@movie), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}, class:"text-white bg-indigo-600 hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded text-sm px-5 py-2.5 text-center" %>
+</div>
