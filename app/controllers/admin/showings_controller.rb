@@ -16,14 +16,19 @@ class Admin::ShowingsController < ApplicationController
 
     respond_to do |format|
       time = @showing.time
+      date = @showing.date
+  
       if time.present?
         formatted_time = time.strftime("%H:%M")
         if formatted_time == "10:00" || formatted_time == "14:00" || formatted_time == "18:00" || formatted_time == "22:00"
-          
-          if @showing.save        
-            format.html { redirect_to admin_showings_url, notice: "Show created successfully."}
+          if !Showing.exists?(date: date, time: formatted_time, movie_id: @showing.movie.id, cinema_id: @showing.cinema.id)
+            if @showing.save        
+              format.html { redirect_to admin_showings_url, notice: "Show created successfully."}
+            else 
+              format.html { render :new, status: :unprocessable_entity }
+            end
           else 
-            format.html { render :new, status: :unprocessable_entity }
+            format.html { redirect_to request.referer, alert: 'Please check the details. Schedule might already existed!' }
           end
 
         else
@@ -40,11 +45,12 @@ class Admin::ShowingsController < ApplicationController
     
     respond_to do |format|
       time = @showing.time
-      date = @showing.date 
+      date = @showing.date
+      
       if time.present?
         formatted_time = time.strftime("%H:%M")
-        if formatted_time == "10:00" || formatted_time == "14:00" || formatted_time == "18:00" || formatted_time == "22:00"
-          
+        if formatted_time == "10:00"  || formatted_time == "14:00" || formatted_time == "18:00" || formatted_time == "22:00" 
+        
           if @showing.update(showing_params)      
             format.html { redirect_to admin_showings_url, notice: "Show updated successfully."}
           else 
@@ -55,7 +61,7 @@ class Admin::ShowingsController < ApplicationController
           format.html { redirect_to request.referer, alert: 'These are the only available time: 10AM, 2PM, 6PM, 10PM' }
         end  
       else 
-        format.html { redirect_to request.referer, alert: "Time shouldn't be emtpy! " }
+        format.html { redirect_to request.referer, alert: "Time shouldn't be emtpy! #{@showing.movie.id} #{@showing.cinema.id}" }
       end
     end
   end
