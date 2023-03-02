@@ -19,7 +19,7 @@ class BookingsController < ApplicationController
     @booking = current_user.bookings.build(booking_params)
 
     respond_to do |format|
-      if Booking.exists?(seat_id: @booking.seat_id)
+      if Booking.exists?(seat_id: @booking.seat_id, showing_id: @booking.showing_id)
         format.html { redirect_to request.referer, alert: "Seat is already occupied, try and another." }
       else 
         if @booking.save
@@ -57,7 +57,6 @@ class BookingsController < ApplicationController
         format.html { redirect_to root_url, notice: "Movie deleted successfully!"}
       end
     end
-
   end
 
   private
