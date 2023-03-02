@@ -1,41 +1,24 @@
-<div>
-  <h1 class="font-bold text-4xl flex justify-center">Cinema</h1>
-</div>
+<%= provide(:h1, "Cinema")%>
+<%= provide(:span, "These are the list of cinemas available") %>
+<%= provide(:new_path, new_admin_cinema_path)%>
+<%= provide(:button_name, "Add new Cinema")%>
+<%= render "shared/landing"%>
 
-<div class="mt-12">
-  <%= link_to "Add Cinema", new_admin_cinema_path %>
-</div>
-
-
-<div class="relative overflow-x-auto">
-  <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+<div class="relative overflow-x-auto mt-6">
+  <table class="w-full text-sm text-left text-gray-500">
     <thead class="text-xs text-gray-800 uppercase bg-gray-300">
       <tr>
-        <th class="px-6 py-3" scope="col">ID</th>
-        <th class="px-6 py-3" scope="col">Name</th>
-        <th class="px-6 py-3" scope="col">Available Seats</th>
-        <th class="px-6 py-3" scope="col">Date Added</th>
-        <th class="px-6 py-3" scope="col">Listed or updated by(admin user)</th>
-        <th class="px-6 py-3" scope="col">Action</th>
+        <th class="px-6 py-6" scope="col">ID</th>
+        <th class="px-6 py-6" scope="col">Name</th>
+        <th class="px-6 py-6" scope="col">Available Seats</th>
+        <th class="px-6 py-6" scope="col">Date Added</th>
+        <th class="px-6 py-6" scope="col">Listed or updated by(admin user)</th>
+        <th class="px-6 py-6" scope="col">Action</th>
       </tr>
     </thead>
     <tbody>
       <% @cinemas.each do |cinema| %>
-      <tr class="bg-gray-100 border-b">
-          <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-            <%= cinema.id %>
-          </td>
-          <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-            <%= link_to cinema.name, admin_cinema_path(cinema) %>
-          </td>
-          <td class="px-6 py-4 font-normal text-gray-700 whitespace-normal"><%= cinema.seats.count %></td>
-          <td class="px-6 py-4 font-normal text-gray-700 whitespace-normal"><%= time_tag cinema.created_at, "data-local": "time-ago" %></td>
-          <td class="px-6 py-4 font-normal text-gray-700 whitespace-normal"><%= cinema.user.full_name  %></td>
-          <td>
-            <%= link_to "Edit", edit_admin_cinema_path(cinema), class:"text-yellow-600"%>
-            <%= link_to "Delete", admin_cinema_path(cinema), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class:"text-red-600"%>
-          </td>
-      </tr>
+      <%= render "cinema", cinema: cinema%>
       <% end %>
     </tbody>
   </table>

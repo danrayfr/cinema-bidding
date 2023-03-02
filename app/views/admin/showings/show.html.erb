@@ -1,0 +1,16 @@
+<%= provide(:title, "Showing:#{@showing.movie.title}")%>
+<%= provide(:h1, "#{@showing.movie.title}")%>
+<%= provide(:new_path, "new_admin_movie_path")%>
+<%= provide(:button_name, "Add new Movie")%>
+<%= render "shared/landing"%>
+
+<div class="mt-6">
+  <p class="mb-6">
+  <%= @showing.date.strftime("%B %d %Y")%>
+  <span><%= @showing.time.strftime("%I:%M %p")%></span>
+  </p>
+  <div>
+    <%= link_to "Edit", edit_admin_showing_path(@showing), class:"text-white bg-indigo-600 hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded text-sm px-5 py-2.5 text-center" %>
+    <%= link_to "Delete", admin_showing_path(@showing), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}, class:"text-white bg-indigo-600 hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded text-sm px-5 py-2.5 text-center" %>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<tr class="border-b">
+  <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+    <%= cinema.id %>
+  </td>
+  <td scope="row" class="px-6 py-4 font-medium text-indigo-700 uppercase whitespace-nowrap">
+    <%= link_to cinema.name, admin_cinema_path(cinema) %>
+  </td>
+  <td class="px-6 py-4 font-normal text-gray-700 whitespace-normal"><%= cinema.seats.count %></td>
+  <td class="px-6 py-4 font-normal text-gray-700 whitespace-normal"><%= time_tag cinema.created_at, "data-local": "time-ago" %></td>
+  <td class="px-6 py-4 font-normal text-gray-700 whitespace-normal"><%= cinema.user.full_name  %></td>
+  <td>
+    <%= link_to "Edit", edit_admin_cinema_path(cinema), class:"text-yellow-600"%>
+    <%= link_to "Delete", admin_cinema_path(cinema), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class:"text-red-600"%>
+  </td>
+</tr>

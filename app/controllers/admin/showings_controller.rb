@@ -36,8 +36,8 @@ class Admin::ShowingsController < ApplicationController
   end
 
   def update
-    @showing.update(showing_params)
-
+    @showing = Showing.find(params[:id])
+    
     respond_to do |format|
       time = @showing.time
       date = @showing.date 
@@ -45,7 +45,7 @@ class Admin::ShowingsController < ApplicationController
         formatted_time = time.strftime("%H:%M")
         if formatted_time == "10:00" || formatted_time == "14:00" || formatted_time == "18:00" || formatted_time == "22:00"
           
-          if @showing.update        
+          if @showing.update(showing_params)      
             format.html { redirect_to admin_showings_url, notice: "Show updated successfully."}
           else 
             format.html { render :new, status: :unprocessable_entity }
