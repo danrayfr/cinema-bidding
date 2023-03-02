@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :showings
   end
 
+  get "dashboard", to: "dashboard#index"
   root "bookings#index"
   resources :bookings
   devise_for :users

@@ -1,0 +1,13 @@
+<tr class="border-b">
+  <td class="px-6 py-6 font-normal text-gray-600 whitespace-normal"><%= book.id %></td>
+  <td scope="row" class="px-6 py-6 font-medium  whitespace-nowrap">
+    <%= link_to "Showing #{book.showing_id}", booking_path(book.showing_id), class:"font-medium text-indigo-700 uppercase" %>
+  </td>
+  <td class="px-6 py-6 font-normal text-gray-600 whitespace-normal"><%= book.seat_id %></td>
+  <td class="px-6 py-6 font-normal text-gray-600 whitespace-normal"><%= time_tag book.created_at, "data-local": "time-ago" %></td>
+
+  <td>
+  <%= link_to "Edit", edit_booking_path(book.id), class:"text-yellow-600"%>
+  <%= link_to "Delete", booking_path(book.id), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class:"text-red-600"%>
+  </td>
+</tr>
