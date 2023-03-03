@@ -1,4 +1,4 @@
-class Admin::ShowingsController < ApplicationController
+class Admin::ShowingsController < Admin::AdminController
   before_action :set_showing, only: [:show, :edit]
   def index
     @showings = Showing.all
@@ -11,7 +11,6 @@ class Admin::ShowingsController < ApplicationController
   def edit; end
 
   def create
-    
     @showing = Showing.new(showing_params)
 
     respond_to do |format|
@@ -45,12 +44,12 @@ class Admin::ShowingsController < ApplicationController
     
     respond_to do |format|
       time = @showing.time
-      date = @showing.date
+      date = @showing.date.strftime("%a, %d %b %Y")
       
       if time.present?
         formatted_time = time.strftime("%H:%M")
         if formatted_time == "10:00"  || formatted_time == "14:00" || formatted_time == "18:00" || formatted_time == "22:00" 
-          if !Showing.exists?(date: date, time: formatted_time, cinema_id: @showing.cinema.id)
+          if Showing.exists?(date: date, time: formatted_time, cinema_id: @showing.cinema.id)
             
             if @showing.update(showing_params)      
               format.html { redirect_to admin_showings_url, notice: "Show updated successfully."}
@@ -59,7 +58,7 @@ class Admin::ShowingsController < ApplicationController
             end
 
           else 
-            format.html { redirect_to request.referer, alert: "Please check the details. Schedule might already existed! #{date} #{time} #{@showing.cinema.id}" }
+            format.html { redirect_to request.referer, alert: "Please check the details. Schedule might already existed! #{date} #{formatted_time} #{@showing.cinema.id}" }
           end
 
         else
