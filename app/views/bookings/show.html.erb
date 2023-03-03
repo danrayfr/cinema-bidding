@@ -22,10 +22,10 @@
 </div>
 </div>
 
-<% seats = Seat.where(cinema_id: @show.cinema.id)%>
+<% seats = seats_query(@show.cinema.id) %>
   <div class="flex flex-wrap -mx-1 lg:-mx-4 px-36 gap-8">
   <% seats.each do |seat| %>
-  <% unless Booking.exists?(seat_id: seat.id, showing_id: @show.id) %>
+  <% unless check_if_booking_seats_is_occupied?(seat.id, @show.id) %>
     <div class="max-w-sm p-6 border border-gray-200 rounded-lg shadow bg-white">
       <h5 class="mb-2 text-md font-bold tracking-tight text-gray-600 px-2">
         <%= seat.id %>
@@ -43,9 +43,13 @@
 </div>
 
 <div class="mt-2">
-  <% if Booking.exists?(user_id: current_user.id, showing_id: @show.id)%>
-    <p>You're already booked.</p>
+  <% if remaining_seats(@show.cinema.id, @show.id) == 0 %>
+      Fully Booked!
   <% else %>
-    <%= render "form", show_id: @show.id, seat_id: @seat %>
+    <% if check_if_booking_exists?(current_user.id, @show.id)%>
+      <p>You're already booked.</p>
+    <% else %>
+      <%= render "form", show_id: @show.id, seat_id: @seat %>
+    <% end %>
   <% end %>
 </div>

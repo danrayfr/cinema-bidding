@@ -3,7 +3,7 @@
     <%= link_to show.movie.title, booking_path(show), class:"font-medium text-indigo-700 uppercase" %>
   </td>
   <td class="px-6 py-6 font-normal text-gray-600 whitespace-normal"><%= show.cinema.name %></td>
-  <td class="px-6 py-6 font-normal text-gray-600 whitespace-normal"><%= Seat.where(cinema_id: show.cinema.id).count - Booking.where(showing_id: show.id).count %></td>
+  <td class="px-6 py-6 font-normal text-gray-600 whitespace-normal"><%= remaining_seats(show.cinema.id, show.id) %></td>
   <td class="px-6 py-6 font-normal text-gray-600 whitespace-normal"><%= show.date.strftime("%B %d %Y") %></td>
   <td class="px-6 py-6 font-normal text-gray-600 whitespace-normal"><%= show.time.strftime("%I:%M %p") %></td>
   <td class="px-6 py-6 font-normal text-gray-600 whitespace-normal"><%= time_tag show.created_at, "data-local": "time-ago" %></td>
