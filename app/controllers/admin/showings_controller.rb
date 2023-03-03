@@ -49,7 +49,7 @@ class Admin::ShowingsController < Admin::AdminController
       if time.present?
         formatted_time = time.strftime("%H:%M")
         if formatted_time == "10:00"  || formatted_time == "14:00" || formatted_time == "18:00" || formatted_time == "22:00" 
-          if Showing.exists?(date: date, time: formatted_time, cinema_id: @showing.cinema.id)
+          if !Showing.exists?(date: date, time: formatted_time, cinema_id: @showing.cinema.id)
             
             if @showing.update(showing_params)      
               format.html { redirect_to admin_showings_url, notice: "Show updated successfully."}
