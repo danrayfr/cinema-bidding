@@ -3,7 +3,7 @@ class BookingsController < ApplicationController
   before_action :set_booking, only: %i()
 
   def index
-    @showings = Showing.all.joins(:cinema)
+    @showings = Showing.all
   end
 
   def show

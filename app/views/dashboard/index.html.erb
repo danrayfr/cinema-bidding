@@ -1,6 +1,6 @@
 <% provide(:title, "User Dashboard")%>
-<%= provide(:h1, "User's Dashboard")%>
-<%= provide(:span, "see your bookings.") %>
+<%= provide(:h1, "Current User Dashboard")%>
+<%= provide(:span, "Current user's bookings.") %>
 
 <%= render "shared/landing"%>
 
@@ -11,6 +11,9 @@
       <tr>
         <th class="px-6 py-6" scope="col">Book ID</th>
         <th class="px-6 py-6" scope="col">Showing Number</th>
+        <th class="px-6 py-6" scope="col">Movie Title</th>
+        <th class="px-6 py-6" scope="col">Cinema(location)</th>
+        <th class="px-6 py-6" scope="col">Schedule</th>
         <th class="px-6 py-6" scope="col">Seat number</th>
         <th class="px-6 py-6" scope="col">Date booked</th>
       </tr>

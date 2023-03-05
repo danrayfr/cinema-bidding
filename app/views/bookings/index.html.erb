@@ -1,8 +1,13 @@
 <% provide(:title, "")%>
-<%= provide(:h1, "Now Showing")%>
-<%= provide(:span, "Book a movie now!") %>
+<% if @showings.exists? %>
+  <%= provide(:h1, "Now Showing")%>
+  <%= provide(:span, "Book a movie now!") %>
+<% else %>
+  <%= provide(:h1, "No shows available yet!")%>
+<% end%>
 <%= render "shared/landing"%>
 
+<% if @showings.exists? %>
 <div class="relative overflow-x-auto mt-6">
   <table class="w-full text-sm text-left text-gray-500">
     <thead class="text-xs text-gray-800 uppercase bg-gray-300">
@@ -22,3 +27,4 @@
     </tbody>
   </table>
 </div>
+<% end %>
