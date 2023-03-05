@@ -9,11 +9,15 @@ module BookingsHelper
   end
 
   def seats_query(show_cinema_id)
-    Seat.where(cinema_id: show_cinema_id)
+    Seat.where(cinema_id: show_cinema_id)# .includes(:seat_name)
   end
 
   def remaining_seats(show_cinema_id, show_id)
     Seat.where(cinema_id: show_cinema_id).count - Booking.where(showing_id: show_id).count
+  end
+
+  def current_user_book(seat_id, show_id, user_id)
+    Booking.exists?(seat_id: seat_id, showing_id: show_id, user_id: user_id)
   end
   
 end

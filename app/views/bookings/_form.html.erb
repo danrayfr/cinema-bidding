@@ -6,7 +6,7 @@
   <div class="field">
     <%= form.label :seat_id, class:"block text-sm font-medium text-gray-900" %>
     <% unless Booking.exists?(seat_id: seat_id)%>
-      <%= form.collection_select :seat_id, Seat.where(cinema_id: @show.cinema.id), :id, :id %>
+      <%= form.collection_select :seat_id, Seat.where(cinema_id: @show.cinema.id), :id, :seat_name %>
     <% end %>
   </div>
 

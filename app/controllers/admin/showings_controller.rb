@@ -58,7 +58,7 @@ class Admin::ShowingsController < Admin::AdminController
             end
 
           else 
-            format.html { redirect_to request.referer, alert: "Please check the details. Schedule might already existed! #{date} #{formatted_time} #{@showing.cinema.id}" }
+            format.html { redirect_to request.referer, alert: "Please check the details. Schedule might already existed! #{date} #{formatted_time}" }
           end
 
         else

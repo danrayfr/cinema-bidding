@@ -26,13 +26,14 @@ class Admin::CinemasController < Admin::AdminController
 
         if @cinema.seat_count.nil? || @cinema.seat_count <= 10
           @cinema.seat_count = 10
-          Cinema::DEFAULT_SEAT_COUNT.times do
-            @cinema.seats.create
+          Cinema::DEFAULT_SEAT_COUNT.times do |n|
+
+            @cinema.seats.create(seat_name: "Seat: #{n+1}")
           end
-        else
-          @cinema.seat_count.times do 
-            @cinema.seats.create
-          end
+        # else
+        #   @cinema.seat_count.times do 
+        #     @cinema.seats.create(seat_name: "")
+        #   end
         end
       
         format.html { redirect_to admin_cinemas_url, notice: "Cinema created successfully."}

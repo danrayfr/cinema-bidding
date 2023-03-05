@@ -12,42 +12,52 @@
 </div>
 
 <div class="mt-2 mb-6">
-<div class="inline-flex items-center">
-  <span class="w-2 h-2 inline-block bg-indigo-500 rounded-full mr-2"></span>
-  <span class="text-gray-600 dark:text-gray-400">Occupied</span>
-</div>
-<div class="inline-flex items-center">
-  <span class="w-2 h-2 inline-block bg-gray-600 rounded-full mr-2"></span>
-  <span class="text-gray-600 dark:text-gray-400">Available</span>
-</div>
+  <div class="inline-flex items-center">
+    <span class="w-2 h-2 inline-block bg-indigo-500 rounded-full mr-2"></span>
+    <span class="text-gray-600 dark:text-gray-400">Occupied</span>
+  </div>
+  <div class="inline-flex items-center">
+    <span class="w-2 h-2 inline-block bg-gray-600 rounded-full mr-2"></span>
+    <span class="text-gray-600 dark:text-gray-400">Available</span>
+  </div>
+  <div class="inline-flex items-center">
+    <span class="w-2 h-2 inline-block bg-green-600 rounded-full mr-2"></span>
+    <span class="text-gray-600 dark:text-gray-400">You're seat</span>
+  </div>
 </div>
 
 <% seats = seats_query(@show.cinema.id) %>
-  <div class="flex flex-wrap -mx-1 lg:-mx-4 px-36 gap-8">
+  <div class="flex flex-wrap -mx-1 lg:-mx-4 px-36 gap-12">
   <% seats.each do |seat| %>
-  <% unless check_if_booking_seats_is_occupied?(seat.id, @show.id) %>
-    <div class="max-w-sm p-6 border border-gray-200 rounded-lg shadow bg-white">
-      <h5 class="mb-2 text-md font-bold tracking-tight text-gray-600 px-2">
-        <%= seat.id %>
+  <% if current_user_book(seat.id, @show.id, current_user.id) %>
+    <div class="max-w-sm p-16 border border-gray-200 rounded-lg shadow bg-green-600">
+      <h5 class="mb-2 text-md font-bold tracking-tight text-white px-2">
+        <%= seat.seat_name %>
+      </h5>
+    </div >
+  <% elsif check_if_booking_seats_is_occupied?(seat.id, @show.id) %>
+    <div class="max-w-sm p-16 border border-gray-200 rounded-lg shadow bg-indigo-600">
+      <h5 class="mb-2 text-md font-bold tracking-tight text-white px-2">
+        <%= seat.seat_name %>
       </h5>
     </div >
   <% else %>
-    <div class="max-w-sm p-6 border border-gray-200 rounded-lg shadow bg-indigo-600">
-      <h5 class="mb-2 text-md font-bold tracking-tight text-white px-2">
-        <%= seat.id %>
+    <div class="max-w-sm p-16 border border-gray-200 rounded-lg shadow bg-white">
+      <h5 class="mb-2 text-md font-bold tracking-tight text-gray-600 px-2">
+        <%= seat.seat_name %>
       </h5>
     </div >
   <% end %>
-  <% end %>
-  
+<% end %>
+
 </div>
 
 <div class="mt-2">
   <% if remaining_seats(@show.cinema.id, @show.id) == 0 %>
-      Fully Booked!
+      <h1 class="font-semibold text-2xl mt-6">Fully Booked!</h1>
   <% else %>
     <% if check_if_booking_exists?(current_user.id, @show.id)%>
-      <p>You're already booked.</p>
+      <p class="font-semibold text-2xl mt-6">You're already booked.</p>
     <% else %>
       <%= render "form", show_id: @show.id, seat_id: @seat %>
     <% end %>
