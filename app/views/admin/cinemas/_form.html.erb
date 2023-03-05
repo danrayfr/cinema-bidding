@@ -1,13 +1,17 @@
+
+<div class="mb-4">
+  <h2 class="font-bold text-5xl text-gray-800">Add new cinema</h2>
+</div>
 <%= form_with(model: [:admin, @cinema], id: "#{dom_id(@cinema)}_form") do |form| %>
-  <%= render "shared/error_messages", object: form.object %>
+<%= render "shared/error_messages", object: form.object %>
 
-  <div class="mb-6">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
+<div class="mb-6">
+  <%= form.label :name, class:"block text-sm font-medium text-gray-900 mb-6" %>
+  <%= form.text_field :name, class:"-mt-3 border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-1/4 p-2.5" %>
+</div>
 
-  <div class="mb-6">
-    <%= form.submit %>
-  </div>
+<div class="mb-6">
+  <%= form.submit "Create Cinema", class:"text-white bg-indigo-600 hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm w-1/4 px-5 py-2.5 text-center"  %>
+</div>
 
 <% end %>

@@ -1,6 +1,8 @@
-<div>
-  <h1 class="font-bold text-4xl">Admin::Showings#new</h1>
-  <p>Find me in app/views/admin/showings/index.html.erb</p>
-</div>
+<%= provide(:title, "Admin")%>
+<%= provide(:h1, "New Showing")%>
+<%= provide(:span, "This is the page where you can add new showing.") %>
+<%= render "shared/landing"%>
 
-<%= render "form" %>
+<div class="mt-6">
+  <%= render "form" %>
+</div>

@@ -1,5 +1,8 @@
-<div>
-  <h1 class="font-bold text-4xl">Admin::Cinema#new</h1>
-</div>
+<%= provide(:title, "Admin")%>
+<%= provide(:h1, "New Cinema")%>
+<%= provide(:span, "This is the page where you can add new cinema.") %>
+<%= render "shared/landing"%>
 
-<%= render "form", cinema: @cinema%>
+<div class="mt-6">
+  <%= render "form", cinema: @cinema %>
+</div>
