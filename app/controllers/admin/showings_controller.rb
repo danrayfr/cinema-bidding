@@ -1,7 +1,7 @@
 class Admin::ShowingsController < Admin::AdminController
   before_action :set_showing, only: [:show, :edit]
   def index
-    @showings = Showing.all
+    @showings = Showing.all.includes(:movie, :cinema)
   end
 
   def new

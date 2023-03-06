@@ -3,7 +3,7 @@ class Admin::CinemasController < Admin::AdminController
   before_action :set_default_seat_count
 
   def index
-    @cinemas = Cinema.all
+    @cinemas = Cinema.all.includes(:user)
   end 
 
   def show; end

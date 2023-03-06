@@ -2,7 +2,7 @@ class Admin::MoviesController < Admin::AdminController
   before_action :set_movie, only: %i(show edit)
 
   def index
-    @movies = Movie.all
+    @movies = Movie.all.includes(:user)
   end
 
   def show
