@@ -30,4 +30,8 @@ module ApplicationHelper
     "#{show.date.strftime("%a, %d %b %Y")}: #{show.time.strftime("%I:%M %p") }"
   end
 
+  def seat_color(color)
+    "w-2 h-2 inline-block bg-#{color}-500 rounded-full mr-2"
+  end
+
 end
